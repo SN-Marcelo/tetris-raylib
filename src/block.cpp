@@ -36,6 +36,12 @@ std::vector<Position> Block::GetCellPositions()
 void Block::Rotate()
 {
     rotationState++;
-    if (rotationState == cells.size())
+    if (rotationState == (int)cells.size())
         rotationState = 0;
+}
+void Block::UndoRotation()
+{
+    rotationState--;
+    if (rotationState == -1)
+        rotationState = cells.size() - 1;
 };

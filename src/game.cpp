@@ -15,6 +15,8 @@ bool Game::IsBlockOutside()
 void Game::RotateBlock()
 {
     currentBlock.Rotate();
+    if(IsBlockOutside())
+        currentBlock.UndoRotation();
 }
 
 Game::Game()
