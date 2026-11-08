@@ -12,6 +12,11 @@ bool Game::IsBlockOutside()
     return false;
 }
 
+void Game::RotateBlock()
+{
+    currentBlock.Rotate();
+}
+
 Game::Game()
 {
     grid = Grid();
@@ -48,15 +53,18 @@ void Game::HandleInput()
     int keyPressed = GetKeyPressed();
     switch (keyPressed)
     {
-    case KEY_LEFT:
+    case KEY_A:
         MoveBlockLeft();
         break;
-    case KEY_RIGHT:
+    case KEY_D:
         MoveBlockRight();
         break;
-    case KEY_DOWN:
+    case KEY_S:
         MoveBlockDown();
         break;
+    case KEY_L:
+        RotateBlock();
+        break;    
     default:
         break;
     }

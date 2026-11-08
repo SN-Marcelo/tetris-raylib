@@ -14,6 +14,7 @@ private:
     Block nextBlock;
 
     bool IsBlockOutside();
+    void RotateBlock();
 
 public:
     Grid grid;
