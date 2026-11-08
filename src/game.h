@@ -13,6 +13,8 @@ private:
     Block currentBlock;
     Block nextBlock;
 
+    bool IsBlockOutside();
+
 public:
     Grid grid;
 
