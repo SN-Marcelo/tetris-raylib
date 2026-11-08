@@ -13,6 +13,9 @@ private:
     int cellSize;
     int rotationState;
     std::vector<Color> colors;
+
+    int rowOffset;
+    int columnOffset;
     
 public:
     int colorId;
@@ -20,6 +23,9 @@ public:
 
     Block();
     void Draw();
+    void Move(int rows, int columns);
+
+    std::vector<Position> GetCellPositions();
 };
 
 #endif

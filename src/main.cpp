@@ -14,8 +14,6 @@ int main()
 
     IBlock block = IBlock();
 
-    
-
     while (!WindowShouldClose())
     {
         BeginDrawing();
