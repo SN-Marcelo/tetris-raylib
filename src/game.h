@@ -16,6 +16,13 @@ private:
     bool IsBlockOutside();
     void RotateBlock();
     void Reset();
+    void LockBlock();
+    bool BlockFits();
+    void MoveBlockLeft();
+    void MoveBlockRight();
+    void UpdateScore(int linesCleared, int moveDownPoints);
+    Block GetRandomBlock();
+    std::vector<Block> GetAllBlocks();
     
 public:
     Grid grid;
@@ -23,16 +30,9 @@ public:
     int score;
 
     Game();
-    Block GetRandomBlock();
-    std::vector<Block> GetAllBlocks();
     void Draw();
-    void HandleInput();
-    void MoveBlockLeft();
-    void MoveBlockRight();
     void MoveBlockDown();
-    void LockBlock();
-    bool BlockFits();
-    void UpdateScore(int linesCleared, int moveDownPoints);
+    void HandleInput();
 };
 
 #endif
