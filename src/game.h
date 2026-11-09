@@ -27,6 +27,7 @@ public:
     void MoveBlockLeft();
     void MoveBlockRight();
     void MoveBlockDown();
+    void LockBlock();
 };
 
 #endif
