@@ -14,9 +14,17 @@ bool Game::IsBlockOutside()
 
 void Game::RotateBlock()
 {
+    if (gameOver)
+        return;
     currentBlock.Rotate();
     if (IsBlockOutside() || !BlockFits())
+    {
         currentBlock.UndoRotation();
+    }
+    else
+    {
+        PlaySound(rotateSound);
+    }
 }
 
 void Game::Reset()
@@ -37,6 +45,19 @@ Game::Game()
     blocks = GetAllBlocks();
     currentBlock = GetRandomBlock();
     nextBlock = GetRandomBlock();
+
+    InitAudioDevice();
+    music = LoadMusicStream("Sound/tetris_main.wav");
+    PlayMusicStream(music);
+    rotateSound = LoadSound("Sound/tetris_block_rotate.wav");
+    clearNormalSound = LoadSound("Sound/tetris_line_clear_normal.wav");
+    clearTetrisSound = LoadSound("Sound/tetris_line_clear_tetris.wav");
+}
+
+Game::~Game()
+{
+    UnloadMusicStream(music);
+    CloseAudioDevice();
 }
 
 Block Game::GetRandomBlock()
@@ -60,7 +81,7 @@ void Game::Draw()
 {
     grid.Draw();
     currentBlock.Draw(11, 11);
-    switch(nextBlock.colorId)
+    switch (nextBlock.colorId)
     {
     case 6:
         nextBlock.Draw(255, 290);
@@ -146,7 +167,13 @@ void Game::LockBlock()
     }
     nextBlock = GetRandomBlock();
     int rowsCleared = grid.ClearFullRows();
-    UpdateScore(rowsCleared, 0);
+    if (rowsCleared > 0)
+    {
+        (rowsCleared == 4)
+        ? PlaySound(clearTetrisSound)
+        : PlaySound(clearNormalSound);
+        UpdateScore(rowsCleared, 0);
+    }
 }
 
 bool Game::BlockFits()

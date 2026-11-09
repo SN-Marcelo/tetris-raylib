@@ -23,13 +23,19 @@ private:
     void UpdateScore(int linesCleared, int moveDownPoints);
     Block GetRandomBlock();
     std::vector<Block> GetAllBlocks();
+
+    Sound rotateSound;
+    Sound clearNormalSound;
+    Sound clearTetrisSound;
     
 public:
     Grid grid;
     bool gameOver;
     int score;
+    Music music;
 
     Game();
+    ~Game();
     void Draw();
     void MoveBlockDown();
     void HandleInput();
