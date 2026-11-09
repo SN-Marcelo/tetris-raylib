@@ -28,6 +28,7 @@ public:
     void MoveBlockRight();
     void MoveBlockDown();
     void LockBlock();
+    bool BlockFits();
 };
 
 #endif
