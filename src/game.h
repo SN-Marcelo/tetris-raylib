@@ -15,9 +15,11 @@ private:
 
     bool IsBlockOutside();
     void RotateBlock();
-
+    void Reset();
+    
 public:
     Grid grid;
+    bool gameOver;
 
     Game();
     Block GetRandomBlock();
