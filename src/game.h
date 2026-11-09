@@ -14,7 +14,8 @@ private:
     Block nextBlock;
 
     bool IsBlockOutside();
-    void RotateBlock();
+    void RotateBlockRight();
+    void RotateBlockLeft();
     void Reset();
     void LockBlock();
     bool BlockFits();

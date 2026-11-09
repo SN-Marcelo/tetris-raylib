@@ -25,8 +25,10 @@ public:
     void Draw(int offsetX, int offsetY);
     void Move(int rows, int columns);
     std::vector<Position> GetCellPositions();
-    void Rotate();
-    void UndoRotation();
+    void RotateRight();
+    void RotateLeft();
+    void UndoRotationRight();
+    void UndoRotationLeft();
 };
 
 #endif

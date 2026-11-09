@@ -12,14 +12,29 @@ bool Game::IsBlockOutside()
     return false;
 }
 
-void Game::RotateBlock()
+void Game::RotateBlockRight()
 {
     if (gameOver)
         return;
-    currentBlock.Rotate();
+    currentBlock.RotateRight();
     if (IsBlockOutside() || !BlockFits())
     {
-        currentBlock.UndoRotation();
+        currentBlock.UndoRotationRight();
+    }
+    else
+    {
+        PlaySound(rotateSound);
+    }
+}
+
+void Game::RotateBlockLeft()
+{
+    if (gameOver)
+        return;
+    currentBlock.RotateLeft();
+    if (IsBlockOutside() || !BlockFits())
+    {
+        currentBlock.UndoRotationLeft();
     }
     else
     {
@@ -116,7 +131,10 @@ void Game::HandleInput()
         UpdateScore(0, 1);
         break;
     case KEY_L:
-        RotateBlock();
+        RotateBlockRight();
+        break;
+    case KEY_M:
+        RotateBlockLeft();
         break;
     default:
         break;
