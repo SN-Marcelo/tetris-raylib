@@ -20,6 +20,7 @@ private:
 public:
     Grid grid;
     bool gameOver;
+    int score;
 
     Game();
     Block GetRandomBlock();
@@ -31,6 +32,7 @@ public:
     void MoveBlockDown();
     void LockBlock();
     bool BlockFits();
+    void UpdateScore(int linesCleared, int moveDownPoints);
 };
 
 #endif

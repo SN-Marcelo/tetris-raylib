@@ -25,12 +25,14 @@ void Game::Reset()
     blocks = GetAllBlocks();
     currentBlock = GetRandomBlock();
     nextBlock = GetRandomBlock();
+    score = 0;
 }
 
 Game::Game()
 {
     grid = Grid();
     gameOver = false;
+    score = 0;
 
     blocks = GetAllBlocks();
     currentBlock = GetRandomBlock();
@@ -67,7 +69,6 @@ void Game::HandleInput()
     {
         gameOver = false;
         Reset();
-
     }
     switch (keyPressed)
     {
@@ -79,6 +80,7 @@ void Game::HandleInput()
         break;
     case KEY_S:
         MoveBlockDown();
+        UpdateScore(0, 1);
         break;
     case KEY_L:
         RotateBlock();
@@ -90,7 +92,7 @@ void Game::HandleInput()
 
 void Game::MoveBlockLeft()
 {
-    if(gameOver)
+    if (gameOver)
         return;
     currentBlock.Move(0, -1);
     if (IsBlockOutside() || !BlockFits())
@@ -99,7 +101,7 @@ void Game::MoveBlockLeft()
 
 void Game::MoveBlockRight()
 {
-    if(gameOver)
+    if (gameOver)
         return;
     currentBlock.Move(0, 1);
     if (IsBlockOutside() || !BlockFits())
@@ -108,7 +110,7 @@ void Game::MoveBlockRight()
 
 void Game::MoveBlockDown()
 {
-    if(gameOver)
+    if (gameOver)
         return;
     currentBlock.Move(1, 0);
     if (IsBlockOutside() || !BlockFits())
@@ -126,12 +128,13 @@ void Game::LockBlock()
         grid.grid[item.row][item.column] = currentBlock.colorId;
     }
     currentBlock = nextBlock;
-    if(!BlockFits())
+    if (!BlockFits())
     {
         gameOver = true;
     }
     nextBlock = GetRandomBlock();
-    grid.ClearFullRows();
+    int rowsCleared = grid.ClearFullRows();
+    UpdateScore(rowsCleared, 0);
 }
 
 bool Game::BlockFits()
@@ -143,4 +146,27 @@ bool Game::BlockFits()
             return false;
     }
     return true;
+}
+
+void Game::UpdateScore(int linesCleared, int moveDownPoints)
+{
+    switch (linesCleared)
+    {
+    case 1:
+        score += 100;
+        break;
+    case 2:
+        score += 300;
+        break;
+    case 3:
+        score += 500;
+        break;
+    case 4:
+        score += 1000;
+        break;
+    default:
+        break;
+    }
+
+    score += moveDownPoints;
 }
